@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZAKI — Design Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ============================================================
+    UTILITIES
+  ============================================================ -->
+
+    <!-- スクロール進捗バー -->
+    <div id="progress-bar"></div>
+
+    <!-- カスタムカーソル（PC のみ） -->
+    <div id="cursor" aria-hidden="true">
+      <div id="cursor-ring"></div>
+      <div id="cursor-dot"></div>
+    </div>
+
+    <!-- ページローダー -->
+    <div id="loader" role="status" aria-label="Loading">
+      <div class="loader-text" id="loader-text"></div>
+    </div>
+
+    <!-- ============================================================
+    MOBILE MENU
+  ============================================================ -->
+
+    <div
+      class="mobile-menu"
+      id="mobile-menu"
+      role="navigation"
+      aria-label="モバイルメニュー"
+    >
+      <a href="#work" onclick="closeMobileMenu()">Work</a>
+      <a href="#about" onclick="closeMobileMenu()">About</a>
+      <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
+
+    <!-- ============================================================
+    NAVIGATION
+  ============================================================ -->
+
+    <nav id="nav" role="navigation" aria-label="メインナビゲーション">
+      <a class="nav-logo" href="#">ZAKI.DEV</a>
+
+      <!-- デスクトップリンク -->
+      <div class="nav-links">
+        <a href="#work" data-section="work">Work</a>
+        <a href="#about" data-section="about">About</a>
+        <a href="#skills" data-section="skills">Skills</a>
+        <a href="#contact" data-section="contact">Contact</a>
+      </div>
+
+      <!-- ハンバーガーボタン（モバイル） -->
+      <button
+        class="nav-burger"
+        id="burger"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+        onclick="toggleMobileMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- ============================================================
+    HERO
+  ============================================================ -->
+
+    <section class="hero">
+      <!-- 左カラム: タイトル＋キャッチコピー -->
+      <div class="hero-left">
+        <p class="hero-tag">Design Engineer — Portfolio 2025</p>
+
+        <h1 class="hero-name" aria-label="DESIGN x CODE">
+          <span class="hero-name-line"
+            ><span>DE<em>S</em></span></span
+          >
+          <span class="hero-name-line"><span>IGN</span></span>
+          <span class="hero-name-line"><span>x</span></span>
+          <span class="hero-name-line"><span>CODE</span></span>
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="hero-desc">
+            グラフィックデザインの実務経験とフルスタック開発を掛け合わせ、
+            見た目も動きも両方作れるデザインエンジニア。
+          </p>
+          <a class="hero-cta" href="#work">Work を見る →</a>
+        </div>
+      </div>
+
+      <!-- 右カラム: スキル一覧 -->
+      <div class="hero-right" aria-hidden="true">
+        <div class="hero-grid-bg"></div>
+        <img src="images/main/main_01.png" alt="" class="hero-img" />
+        <div class="hero-number">01</div>
+
+        <div class="hero-catchcopy">
+          企画・制作・実装・納品。<br />
+          全部、ひとり。
+        </div>
+
+        <div class="hero-skills">
+          <div class="skill-row">
+            <span class="skill-name">Design</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Illustrator</span>
+              <span class="skill-tag">Photoshop</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Frontend</span>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML / CSS</span>
+              <span class="skill-tag">JavaScript</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Backend</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Dev Tools</span>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">AI Coding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+    WORK
+  ============================================================ -->
+
+    <section id="work">
+      <div class="section-header">
+        <span class="section-label">Work</span>
+        <span class="section-count">Selected Projects</span>
+      </div>
+
+      <!-- フィルターボタン -->
+      <div
+        class="work-filters"
+        role="group"
+        aria-label="作品カテゴリフィルター"
+      >
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="graphic">Graphic</button>
+        <button class="filter-btn" data-filter="spatial">Spatial</button>
+      </div>
+
+      <!-- Featured: 漫画リーダーアプリ -->
+      <article class="work-featured reveal" data-category="web">
+        <div
+          class="work-featured-img expandable"
+          onclick="openGallery('manga-app')"
+          role="button"
+          tabindex="0"
+          aria-label="漫画リーダーアプリの画像を拡大"
+        >
+          <img
+            src="images/web/スクリーンショット 2026-03-27 190559.png"
+            alt="自炊漫画リーダーアプリのスクリーンショット"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+          />
+          <div class="img-placeholder" aria-hidden="true" style="display: none">
+            SCREENSHOT HERE
+          </div>
+          <div class="expand-icon" aria-hidden="true">+</div>
+        </div>
+
+        <div class="work-featured-info">
+          <div class="work-featured-body">
+            <p class="work-type">Web Application</p>
+            <h2 class="work-title">自炊漫画<br />リーダー</h2>
+            <p class="work-desc">
+              漫画リーダーWebアプリ。JWT認証・XSS対策・SQLインジェクション対策・
+              レートリミットによるセキュリティ設計まで一人で実装。
+              課題の発見から設計・開発まで一貫して担当した初の自作サービス。
+            </p>
+            <br />
+            <p>公開デモでは著作権の関係で青空文庫作品を使用しています。</p>
+            <ul class="work-tech" aria-label="使用技術">
+              <li class="tech-tag">Node.js</li>
+              <li class="tech-tag">JWT Auth</li>
+              <li class="tech-tag">SQL</li>
+              <li class="tech-tag">XSS対策</li>
+              <li class="tech-tag">Rate Limiting</li>
+              <li class="tech-tag">Git Server</li>
+            </ul>
+          </div>
+          <a
+            class="work-link"
+            href="https://manga-viewer-server.onrender.com"
+            target="_blank"
+            rel="noopener"
+            ><span
+              >サイトを見る →<br /><small style="font-size: 9px; opacity: 0.6"
+                >※
+                初回アクセス時はサーバー起動に30秒ほどかかる場合があります</small
+              ></span
+            ></a
+          >
+        </div>
+      </article>
+
+      <!-- Featured: 店舗 Web サイト -->
+      <article class="work-featured reveal" data-category="web">
+        <div
+          class="work-featured-img expandable"
+          onclick="openGallery('store-hp')"
+          role="button"
+          tabindex="0"
+          aria-label="店舗HPの画像を拡大"
+        >
+          <img
+            src="images/web/slide2.jpg"
+            alt="店舗WebサイトのスクリーンショットHPト"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+          />
+          <div class="img-placeholder" aria-hidden="true" style="display: none">
+            SCREENSHOT HERE
+          </div>
+          <div class="expand-icon" aria-hidden="true">+</div>
+        </div>
+
+        <div class="work-featured-info">
+          <div class="work-featured-body">
+            <p class="work-type">Web Design</p>
+            <h2 class="work-title">店舗<br />Webサイト</h2>
+            <p class="work-desc">
+              実際に納品した飲食店のWebサイト。デザインから実装まで一貫担当。
+              レスポンシブ対応・メニュー表示・アクセス情報をわかりやすく設計。
+            </p>
+            <ul class="work-tech" aria-label="使用技術">
+              <li class="tech-tag">HTML / CSS</li>
+              <li class="tech-tag">JavaScript</li>
+              <li class="tech-tag">Responsive</li>
+            </ul>
+          </div>
+          <a
+            class="work-link"
+            href="https://komeko-teppan-preview-0327-hv4i.vercel.app"
+            target="_blank"
+            rel="noopener"
+            ><span>サイトを見る →</span></a
+          >
+        </div>
+      </article>
+
+      <!-- Work Grid (3列): ポスター / ロゴ / メニュー -->
+      <div class="work-grid">
+        <!-- ポスター -->
+        <article
+          class="work-item reveal reveal-delay-1"
+          data-category="graphic"
+          onclick="openGallery('poster')"
+          role="button"
+          tabindex="0"
+          aria-label="ポスター作品ギャラリーを開く"
+        >
+          <div class="work-item-img">
+            <img
+              src="images/poster/poster_02_shufuku.jpg"
+              alt="ポスターデザイン サムネイル"
+            />
+            <div class="gallery-badge" aria-hidden="true">3枚</div>
+          </div>
+          <div class="work-item-info">
+            <p class="work-item-type">Poster / POP</p>
+            <h3 class="work-item-title">ポスター<br />POP制作</h3>
+            <p class="work-item-note">
+              視認性と訴求力を両立した店頭POP・イベントポスター。クリックで全作品を確認できます。
+            </p>
+          </div>
+        </article>
+
+        <!-- ロゴ -->
+        <article
+          class="work-item reveal reveal-delay-2"
+          data-category="graphic"
+          onclick="openGallery('logo')"
+          role="button"
+          tabindex="0"
+          aria-label="ロゴデザイン作品ギャラリーを開く"
+        >
+          <div class="work-item-img">
+            <img
+              src="images/logo/logo_01_takosuke-v1.jpg"
+              alt="ロゴデザイン サムネイル"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="img-placeholder-sm"
+              aria-hidden="true"
+              style="display: none"
+            >
+              IMAGE
+            </div>
+            <div class="gallery-badge" aria-hidden="true">2枚</div>
+          </div>
+          <div class="work-item-info">
+            <p class="work-item-type">Logo Design</p>
+            <h3 class="work-item-title">ロゴ<br />デザイン</h3>
+            <p class="work-item-note">
+              「たこ助」ブランドロゴ。20案以上のバリエーションを提案し、方向性の異なるスタイルを一覧で提示。
+            </p>
+          </div>
+        </article>
+
+        <!-- メニュー -->
+        <article
+          class="work-item reveal reveal-delay-3"
+          data-category="graphic"
+          onclick="openGallery('menu')"
+          role="button"
+          tabindex="0"
+          aria-label="メニューデザイン作品ギャラリーを開く"
+        >
+          <div class="work-item-img">
+            <img
+              src="images/menu/menu_01_grand-inside.jpg"
+              alt="メニューデザイン サムネイル"
+            />
+            <div class="gallery-badge" aria-hidden="true">2枚</div>
+          </div>
+          <div class="work-item-info">
+            <p class="work-item-type">Menu Design</p>
+            <h3 class="work-item-title">メニュー<br />デザイン</h3>
+            <p class="work-item-note">
+              飲食店向け紙メニュー制作。Illustratorで印刷物まで一貫対応。クリックで全作品を確認できます。
+            </p>
+          </div>
+        </article>
+      </div>
+      <!-- /.work-grid -->
+
+      <!-- Work Grid Wide (2列): 空間デザイン / 撮影ディレクション -->
+      <div class="work-grid-wide">
+        <!-- 空間デザイン -->
+        <article
+          class="work-item-wide reveal reveal-delay-1"
+          data-category="spatial"
+        >
+          <div
+            class="work-item-wide-img before-after-wrap expandable-ba"
+            aria-label="空間デザイン Before/After"
+            onclick="openBeforeAfterLightbox('spatial')"
+          >
+            <!-- After 画像（下層） -->
+            <img
+              class="ba-after"
+              src="images/spatial/DSC06094.JPG"
+              alt="空間デザイン後"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="ba-after ba-placeholder"
+              aria-hidden="true"
+              style="display: none"
+            >
+              AFTER
+            </div>
+
+            <!-- Before 画像（上層） -->
+            <img
+              class="ba-before"
+              src="images/spatial/DSC06076.JPG"
+              alt="空間デザイン前"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="ba-before ba-placeholder"
+              aria-hidden="true"
+              style="display: none"
+            >
+              BEFORE
+            </div>
+
+            <!-- スライダーハンドル -->
+            <div
+              class="ba-handle"
+              role="slider"
+              aria-label="Before/Afterスライダー"
+              aria-valuenow="50"
+            >
+              <div class="ba-line"></div>
+              <div class="ba-knob">
+                <span class="ba-arrow ba-arrow-l">‹</span>
+                <span class="ba-arrow ba-arrow-r">›</span>
+              </div>
+            </div>
+
+            <span class="ba-label ba-label-before">BEFORE</span>
+            <span class="ba-label ba-label-after">AFTER</span>
+            <div class="expand-icon" aria-hidden="true">+</div>
+          </div>
+
+          <div class="work-item-info">
+            <p class="work-item-type">Spatial Design</p>
+            <h3 class="work-item-title">空間<br />デザイン</h3>
+            <p class="work-item-note">
+              店舗の空間デザイン。スライダーでビフォーアフターを比較、タップで拡大表示できます。
+            </p>
+          </div>
+        </article>
+
+        <!-- 撮影ディレクション（3セット） -->
+        <article
+          class="work-item-wide reveal reveal-delay-2"
+          data-category="graphic"
+        >
+          <div
+            class="work-item-wide-img before-after-wrap expandable-ba"
+            aria-label="撮影レタッチ Before/After"
+            onclick="openBeforeAfterLightbox()"
+            data-ba-sets='[
+            {"title":"セット 1","before":"images/Direction/DSC03327.JPG","after":"images/Direction/co_DSC03327.jpg"},
+            {"title":"セット 2","before":"images/Direction/DSC03561.JPG","after":"images/Direction/co_DSC03561.jpg"},
+            {"title":"セット 3","before":"images/Direction/DSC02973.JPG","after":"images/Direction/co_DSC02973.jpg"}
+          ]'
+          >
+            <!-- After 画像（カードにはセット1のみ） -->
+            <img
+              class="ba-after"
+              src="images/Direction/co_DSC03327.jpg"
+              alt="レタッチ後"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="ba-after ba-placeholder"
+              aria-hidden="true"
+              style="display: none"
+            >
+              AFTER
+            </div>
+
+            <!-- Before 画像 -->
+            <img
+              class="ba-before"
+              src="images/Direction/DSC03327.JPG"
+              alt="レタッチ前"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="ba-before ba-placeholder"
+              aria-hidden="true"
+              style="display: none"
+            >
+              BEFORE
+            </div>
+
+            <!-- スライダーハンドル -->
+            <div
+              class="ba-handle"
+              role="slider"
+              aria-label="Before/Afterスライダー"
+              aria-valuenow="50"
+            >
+              <div class="ba-line"></div>
+              <div class="ba-knob">
+                <span class="ba-arrow ba-arrow-l">‹</span>
+                <span class="ba-arrow ba-arrow-r">›</span>
+              </div>
+            </div>
+
+            <span class="ba-label ba-label-before">BEFORE</span>
+            <span class="ba-label ba-label-after">AFTER</span>
+            <div class="expand-icon" aria-hidden="true">+</div>
+          </div>
+
+          <!-- 3セットインジケーター -->
+          <div class="ba-dots" aria-hidden="true">
+            <div class="ba-dot active"></div>
+            <div class="ba-dot"></div>
+            <div class="ba-dot"></div>
+          </div>
+
+          <div
+            class="work-item-info clickable-info"
+            onclick="openBeforeAfterLightbox()"
+            role="button"
+            tabindex="0"
+          >
+            <p class="work-item-type">Photography</p>
+            <h3 class="work-item-title">撮影<br />ディレクション</h3>
+            <p class="work-item-note">
+              撮影ディレクション・構図設計・現場管理・レタッチまで一貫担当。スライダーで前後を比較できます。
+            </p>
+          </div>
+        </article>
+      </div>
+      <!-- /.work-grid-wide -->
+    </section>
+    <!-- /#work -->
+
+    <!-- ============================================================
+    ABOUT
+  ============================================================ -->
+
+    <div class="section-header reveal">
+      <span class="section-label">About</span>
+    </div>
+
+    <section id="about">
+      <div class="about-wrap">
+        <!-- 左: キャッチ＋数字カード -->
+        <div class="about-left reveal">
+          <div class="about-big">DESIGN<br /><em>IS</em><br />CODE.</div>
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-num" data-count="30">0</div>
+              <div class="stat-label">Years Old</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" data-count="5" data-suffix="+">0</div>
+              <div class="stat-label">Years Design</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" data-count="2">0</div>
+              <div class="stat-label">Roles in One</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" data-count="1">0</div>
+              <div class="stat-label">Shipped App</div>
+            </div>
+            <div class="stat">
+              <div
+                class="stat-label"
+                style="
+                  font-size: 10px;
+                  letter-spacing: 0.06em;
+                  line-height: 1.5;
+                "
+              >
+                多摩美術大学<br />統合デザイン学科
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右: 自己紹介文 -->
+        <div class="about-right">
+          <p class="about-para reveal">
+            多摩美術大学 統合デザイン学科卒。グラフィックデザイナーとして、
+            企画・打ち合わせから撮影ディレクション・レタッチ・印刷物納品まで
+            一気通貫して担当してきた。
+          </p>
+          <p class="about-para reveal reveal-delay-1">
+            HTMLとCSSを触るうちに<strong>「コードでもデザインできる」</strong>ことに気づき、
+            バイブコーディングにハマる。気づいたらNode.jsでフルスタックのWebアプリを
+            セキュリティ設計込みで一人で作っていた。
+          </p>
+          <p class="about-para reveal reveal-delay-2">
+            デザインの審美眼とエンジニアリングの実装力を両方持つ
+            <strong>「Design Engineer」</strong>として、
+            AIを積極的に活用しながら、プロダクトを0から作れる環境を求めて転職活動中。
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /#about -->
+
+    <!-- ============================================================
+    SKILLS
+  ============================================================ -->
+
+    <div class="section-header reveal">
+      <span class="section-label">Skills</span>
+    </div>
+
+    <section id="skills">
+      <div class="skills-grid">
+        <div class="skill-col reveal">
+          <p class="skill-col-title">Design</p>
+          <ul class="skill-list">
+            <li>Adobe Illustrator</li>
+            <li>Adobe Photoshop</li>
+            <li>空間デザイン</li>
+            <li>撮影・レタッチ</li>
+            <li>印刷物制作</li>
+          </ul>
+        </div>
+
+        <div class="skill-col reveal reveal-delay-1">
+          <p class="skill-col-title">Frontend</p>
+          <ul class="skill-list">
+            <li>HTML / CSS</li>
+            <li>JavaScript</li>
+            <li>レスポンシブ設計</li>
+            <li>UI実装</li>
+          </ul>
+        </div>
+
+        <div class="skill-col reveal reveal-delay-2">
+          <p class="skill-col-title">Backend</p>
+          <ul class="skill-list">
+            <li>Node.js</li>
+            <li>SQL</li>
+            <li>JWT認証</li>
+            <li>セキュリティ設計</li>
+            <li>サーバー構築</li>
+          </ul>
+        </div>
+
+        <div class="skill-col reveal reveal-delay-3">
+          <p class="skill-col-title">Tools / Other</p>
+          <ul class="skill-list">
+            <li>Git</li>
+            <li>AI活用開発</li>
+            <li>Vibe Coding</li>
+            <li>ディレクション</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- /#skills -->
+
+    <!-- ============================================================
+    CONTACT
+  ============================================================ -->
+
+    <div class="section-header reveal">
+      <span class="section-label">Contact</span>
+    </div>
+
+    <section id="contact">
+      <div class="contact-wrap">
+        <!-- 左: キャッチ＋SNSリンク -->
+        <div class="contact-left reveal">
+          <div class="contact-big">LET'S<br /><em>WORK</em><br />TOGETHER.</div>
+          <nav class="contact-links" aria-label="外部リンク">
+            <a
+              class="contact-link"
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener"
+              ><span>GitHub</span><span>→</span></a
+            >
+            <a
+              class="contact-link"
+              href="https://wantedly.com/"
+              target="_blank"
+              rel="noopener"
+              ><span>Wantedly</span><span>→</span></a
+            >
+            <a
+              class="contact-link"
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noopener"
+              ><span>X / Twitter</span><span>→</span></a
+            >
+          </nav>
+        </div>
+
+        <!-- 右: メールアドレス -->
+        <div class="contact-right reveal reveal-delay-2">
+          <p class="contact-label">Get in touch</p>
+          <!-- メールアドレスを差し替え -->
+          <a
+            class="contact-email"
+            href="/cdn-cgi/l/email-protection#c9b0a6bcbb89aca4a8a0a5e7aaa6a4"
+            ><span
+              class="__cf_email__"
+              data-cfemail="334a5c464173565e525a5f1d505c5e"
+              >[email&#160;protected]</span
+            ></a
+          >
+          <p class="contact-note">
+            カジュアル面談・お仕事のご相談、お気軽にどうぞ。<br />
+            デザイン×開発が絡む案件であれば特に歓迎です。
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /#contact -->
+
+    <!-- ============================================================
+    FOOTER
+  ============================================================ -->
+
+    <footer>
+      <span class="footer-copy">© 2025 ZAKI — Design Engineer</span>
+      <a class="footer-back" href="#">Top に戻る ↑</a>
+    </footer>
+
+    <!-- ============================================================
+    LIGHTBOX: 通常ギャラリー
+  ============================================================ -->
+
+    <div
+      id="lightbox"
+      class="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="作品ギャラリー"
+      onclick="closeLightboxOnBackdrop(event)"
+    >
+      <div class="lightbox-inner" onclick="event.stopPropagation()">
+        <!-- メイン画像＋前後ボタン -->
+        <div class="lightbox-main">
+          <button
+            class="lightbox-arrow lightbox-prev"
+            onclick="prevImage()"
+            aria-label="前の画像"
+          >
+            ←
+          </button>
+          <div class="lightbox-img-wrap">
+            <img id="lightbox-img" src="" alt="作品画像" />
+          </div>
+          <button
+            class="lightbox-arrow lightbox-next"
+            onclick="nextImage()"
+            aria-label="次の画像"
+          >
+            →
+          </button>
+        </div>
+
+        <!-- カウンター＆キャプション -->
+        <div class="lightbox-meta">
+          <span id="lightbox-counter" class="lightbox-counter"></span>
+          <span id="lightbox-caption" class="lightbox-caption"></span>
+        </div>
+
+        <!-- サムネイル一覧 -->
+        <div id="lightbox-thumbs" class="lightbox-thumbs"></div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+    LIGHTBOX: Before/After 比較
+  ============================================================ -->
+
+    <div
+      id="lb-ba"
+      class="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Before/After 拡大比較"
+      onclick="closeLbBaOnBackdrop(event)"
+    >
+      <div class="lightbox-inner" onclick="event.stopPropagation()">
+        <!-- ← → を画像の左右に配置（通常ギャラリーと同じUI） -->
+        <div class="lightbox-main">
+          <button
+            id="lb-ba-prev"
+            class="lightbox-arrow lightbox-prev"
+            onclick="prevBaSet()"
+            aria-label="前の比較セット"
+          >
+            ←
+          </button>
+          <div class="lb-ba-wrap before-after-wrap" id="lb-ba-wrap">
+            <img id="lb-ba-after" class="ba-after" src="" alt="After" />
+            <img id="lb-ba-before" class="ba-before" src="" alt="Before" />
+            <div
+              class="ba-handle"
+              role="slider"
+              aria-label="Before/Afterスライダー"
+              aria-valuenow="50"
+            >
+              <div class="ba-line"></div>
+              <div class="ba-knob">
+                <span class="ba-arrow ba-arrow-l">‹</span>
+                <span class="ba-arrow ba-arrow-r">›</span>
+              </div>
+            </div>
+            <span class="ba-label ba-label-before">BEFORE</span>
+            <span class="ba-label ba-label-after">AFTER</span>
+          </div>
+          <button
+            id="lb-ba-next"
+            class="lightbox-arrow lightbox-next"
+            onclick="nextBaSet()"
+            aria-label="次の比較セット"
+          >
+            →
+          </button>
+        </div>
+
+        <!-- カウンター＆キャプション -->
+        <div class="lightbox-meta" style="margin-top: 12px">
+          <span id="lb-ba-counter" class="lightbox-counter">1 / 3</span>
+          <span id="lb-ba-caption" class="lightbox-caption">料理レタッチ</span>
+        </div>
+
+        <div id="lb-ba-thumbs" class="lightbox-thumbs"></div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
