@@ -410,6 +410,7 @@ function initBeforeAfterLightbox() {
     setTimeout(() => {
       before.src = set.before;
       after.src = set.after;
+      before.style.clipPath = "inset(0 50% 0 0)";
       setBaPosition(0.5);
       before.style.opacity = "1";
       after.style.opacity = "1";
